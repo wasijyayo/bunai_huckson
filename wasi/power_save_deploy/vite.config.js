@@ -4,5 +4,5 @@ import react from '@vitejs/plugin-react'
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/power_save_deploy/',
+  base: '/bunai_huckson/wasi/power_save_deploy/',
 })
