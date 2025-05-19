@@ -1,7 +1,8 @@
 import Login from "./components/Login"
 import Home from "./components/Home"
+import Kuizu from "./components/Kuizu";
 import AddDate from "./components/addDate"
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 function App() {
 
@@ -9,6 +10,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Home />}
+        />
+        <Route path="/" element={<Kuizu/>}
         />
         <Route path="/" element={<addDate />}
         />
