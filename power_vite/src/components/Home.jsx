@@ -99,7 +99,15 @@ const Home = () => {
                                         required
                                         />
                                     </FormControl>
-                                    <Button colorScheme="blue" mr={3} onClick={() => {
+                                    <Button colorScheme="blue" mr={3} onClick={async() => {
+                                        const url = "http://localhost:5001/power-bunai/us-central1/addmessage?text=こんにちは";
+                                        try {
+                                            const res = await fetch(url);
+                                            const data = await res.json();
+                                            console.log("APIレスポンス:", data);
+                                        } catch (err) {
+                                            console.error("APIエラー:", err);
+                                        }
                                         console.log("学習内容の更新:", editLearning);
                                         updateDb(editLearning);
                                         fetchDb(email);
@@ -112,6 +120,7 @@ const Home = () => {
                                         });
                                     }}>
                                         確定
+                                        
                                     </Button>
 
                                 </ModalBody>
