@@ -100,7 +100,7 @@ const Home = () => {
                                         />
                                     </FormControl>
                                     <Button colorScheme="blue" mr={3} onClick={async() => {
-                                        const url = "http://localhost:5001/power-bunai/us-central1/addmessage?text=こんにちは";
+                                        const url = `https://us-central1-power-bunai.cloudfunctions.net/addmessage?text=${encodeURIComponent(editLearning.title)}`;
                                         try {
                                             const res = await fetch(url);
                                             const data = await res.json();

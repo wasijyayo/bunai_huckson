@@ -43,6 +43,7 @@ const useFirebase = () => {
             setLoading(false);
         }
     };
+    
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
@@ -62,7 +63,7 @@ const useFirebase = () => {
 
         return () => unsubscribe(); // ✅ 正しく監視を解除
     }, []);
-
+    
     const fetchDb = async (email) => {
     setLoading(true);
     try {
