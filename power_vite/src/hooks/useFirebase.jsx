@@ -43,15 +43,17 @@ const useFirebase = () => {
             setLoading(false);
         }
     };
-    
+    //メールアドレスを初回読み込み時に取得する関数
     useEffect(() => {
         const unsubscribe = auth.onAuthStateChanged((user) => {
-            setUser(user);
+            setUser(user);//  ユーザー情報をセット
             if (user) {
                 setEmail(user.email);
                 fetchDb(user.email); // ✅ ユーザーのメールアドレスを渡す
             } else {
+                //ユーザーがログインしていない場合の分岐
                 const authNotRequiredPaths = ["/login", "/register", "/sendReset"];
+                //現在地を返してくれる値
                 const currentPath = window.location.pathname;
 
                 // ✅ ログインが必要なページの場合、ログイン画面へ遷移
@@ -181,6 +183,52 @@ const useFirebase = () => {
             console.error("匿名ログインエラー:", error);
         }
     };
+    const editDb = async (editLearning) => {
+        try {
+            if (!editLearning.id) {
+                // idが空なら新規作成
+                const docRef = await addDoc(collection(db, email), {
+                    title: editLearning.title,
+                    time: Number(editLearning.time),
+                    date: Number(editLearning.date),
+                    createAt: serverTimestamp(),
+                });
+                // Cloud Functionsにも新規作成として送信（idはdocRef.id）
+                await fetch("https://asia-northeast1-power-bunai.cloudfunctions.net/updateLearning", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email,
+                        id: docRef.id,
+                        title: editLearning.title,
+                        time: editLearning.time,
+                        date: editLearning.date
+                    })
+                });
+            } else {
+                // idがある場合は更新
+                const docRef = doc(db, email, editLearning.id);
+                await updateDoc(docRef, {
+                    title: editLearning.title,
+                    time: Number(editLearning.time),
+                    date: Number(editLearning.date),
+                });
+                await fetch("https://asia-northeast1-power-bunai.cloudfunctions.net/updateLearning", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email,
+                        id: editLearning.id,
+                        title: editLearning.title,
+                        time: editLearning.time,
+                        date: editLearning.date
+                    })
+                });
+            }
+        } catch (error) {
+            console.error("データ更新エラー:", error); // 🚨 Firebase からエラーをキャッチ
+        }
+    };
 
     return { // ✅ 他コンポーネントで使うための `return`
         loading,
@@ -201,6 +249,7 @@ const useFirebase = () => {
         handCreate,
         logout,
         gestLogin,
+        editDb,
     };
 };
 export default useFirebase;
