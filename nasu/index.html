@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>マインスイーパー</title>
+        <link rel="stylesheet" href="style.css"> 
+        </head>
+
+    <body>
+        <div id="JMS_main">
+            <table id="landmine"></table>
+            <div id="operation">
+                <div class="text-lg text-red-600">
+                    残りの地雷の数：
+                    <span class="font-semibold" id="landMineCount">0</span>
+                 </div>
+                <div class="text-lg text-orange-500">
+                    経過時間：<span class="font-semibold" id="costTime">0</span> s
+                </div>
+            <fieldset>
+                <legend class="text-lg font-semibold">難易度選択：</legend>
+          <input
+            type="radio"
+            name="level"
+            id="llevel"
+            checked="checked"
+            value="10"
+            class="mr-2"
+          />
+          <label for="llevel">初心者 (10*10) </label><br />
+          <input
+            type="radio"
+            name="level"
+            id="mlevel"
+            value="15"
+            class="mr-2"
+          />
+          <label for="mlevel">中級者 (15*15) </label><br />
+          <input
+            type="radio"
+            name="level"
+            id="hlevel"
+            value="20"
+            class="mr-2"
+          />
+          <label for="hlevel">上級者 (20*20) </label><br />
+            </fieldset>
+            </div>
+            <button id="begin">
+                ゲームスタート
+            </button>
+        </div>
+        <script src="./jms.js"></script>
+        <script src="./script.js"></script>
+    </body>
+</html>
