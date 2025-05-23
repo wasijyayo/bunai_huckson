@@ -4,14 +4,10 @@ window.onload = function () {
   var radios = document.getElementsByName("level");
   for (var i = 0, j = radios.length; i < j; i++) {
     radios[i].onclick = function () {
-      if (jms != null)
-        if (jms.landMineCount > 0)
-          if (!confirm("Are you sure you want to end the current game?"))
-            return false;
       var value = this.value;
       init(value, value, (value * value) / 5 - value, (value * value) / 5);
-      document.getElementById("JMS_main").style.width =
-        value * 40 + 180 + 60 + "px";
+      //document.getElementById("JMS_main").style.width =
+       // value * 40 + 180 + 60 + "px";
     };
   }
   init(10, 10, 10, 10);
@@ -44,6 +40,19 @@ beginButton.onclick = function () {
 
   // ゲームを開始
   jms.begin();
+
+  beginButton.onclick = function () {
+  jms.play();
+  landMineCountElement.innerHTML = jms.landMineCount;
+  jms.begin();
+
+  startGame(); // 画面切り替え
+
+  timeHandle = setInterval(function () {
+    timeShow.innerHTML = parseInt((new Date() - jms.beginTime) / 1000);
+  }, 1000);
+};
+
 
   // 経過時間を更新
   timeHandle = setInterval(function () {
