@@ -30,10 +30,10 @@
     this.currentSetpCount = 0; // 実行されたステップ数
     this.endCallBack = null; // ゲーム終了時のコールバック関数
     this.landMineCallBack = null; // 地雷がマークされたときの残りの地雷数を更新するコールバック関数
-    this.doc.oncontextmenu = function () {
+    //this.doc.oncontextmenu = function () {
       // 右クリックメニューを無効にする
-      return false;
-    };
+      //return false;
+    //};
     this.drawMap();
   };
 
@@ -59,14 +59,14 @@
         this.end();
         this.showAll();
         this.disableAll();
-        alert("Congratulation!");
+        gameclear();
     },
     // ゲーム失敗
     failed: function() {
         this.end();
         this.showAll();
         this.disableAll();
-        alert("GAME OVER!");
+        gameOver();
     },
     // エントリーポイント
     play: function() {
@@ -127,6 +127,7 @@
                 obj.innerHTML = this.arrs[x][y];
             }
             obj.className = "clicked-cell";
+            obj.classList.add("safe");
             if (this.currentSetpCount + this.landMineCount == this.rowCount * this.colCount) {
                 this.success();
             }

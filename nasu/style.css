@@ -4,8 +4,8 @@ body{
 }
 
 #JMS_main{
-    max-width: auto;
-    margin: 0 auto;
+    width: 640px;
+    margin: 15px auto;
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0,0.1);
@@ -25,8 +25,8 @@ body{
 #begin{
     background-color: blue;
     color: white;
-
 }
+
 #begin:hover{
     background-color: rgb(85, 85, 255);
 }
@@ -34,10 +34,14 @@ body{
 .container {
   max-width: 600px;
 }
+
+
 table {
-  background: #ccc;
-  margin: 0 auto;
+    border: 10px;
+    background: #ccc;
+    margin: 0 auto;
 }
+
 td {
   border: 2px outset #eee;
   font-size: 20px;
@@ -46,6 +50,7 @@ td {
   text-align: center;
   cursor: pointer;
 }
+
 button {
   padding: 2px 10px;
   margin: 5px;
@@ -59,14 +64,44 @@ button {
   font-weight: bold;
 }
 
+.safe {
+  background-color: #c6f6d5 !important; /* ñæÇÈÇ¢ÉOÉäÅ[Éì */
+}
+
+
 .landMine {
-  background-image: url(./TNT_.png);
+  background-image: url(./TNT.png);
   background-position: center;
   background-repeat: no-repeat;
+  background-size: contain;
 }
 
 .flag {
-  background-image: url(./flag_.png);
+  background-image: url(./flag.png);
   background-position: center;
   background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.scene{
+  display: none;
+}
+
+.scene.active{
+  display: block;
+}
+
+#gameover button {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 9999;
 }
