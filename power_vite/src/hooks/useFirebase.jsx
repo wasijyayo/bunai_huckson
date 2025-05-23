@@ -69,16 +69,11 @@ const useFirebase = () => {
     const fetchDb = async (email) => {
     setLoading(true);
     try {
-        const userCollectionRef = collection(db, email);//コレクション参照
-        const q = query(userCollectionRef);
-        const querySnapshot = await getDocs(q);
-        const fetchedLearnings = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-        }));
-
-        console.log("取得したデータ:", fetchedLearnings); // ✅ 最終的なデータの確認
-        setLearnings(fetchedLearnings);
+        const url = "https://asia-northeast1-power-bunai.cloudfunctions.net/getCollection?collection=" + email;
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log(data.items); // コレクションの全データが配列で取得できる
+        setLearnings(data.items); // ✅ ステートにセット
     } catch (error) {
         console.error("データ取得エラー:", error); // 🚨 Firebase からエラーをキャッチ
     } finally {
@@ -183,6 +178,7 @@ const useFirebase = () => {
             console.error("匿名ログインエラー:", error);
         }
     };
+    //コレクション参照用
     const editDb = async (editLearning) => {
         try {
             if (!editLearning.id) {
@@ -229,6 +225,15 @@ const useFirebase = () => {
             console.error("データ更新エラー:", error); // 🚨 Firebase からエラーをキャッチ
         }
     };
+    const GeminiTestasync = async(sendText) => {
+        fetch("http://localhost:5001/power-bunai/getGimini?contents="+ encodeURIComponent(sendText))
+        .then(res => res.json())
+        .then(data => {
+            // ここでの data は { text: "AIの返答" } というオブジェクト
+            console.log(data.text); // AIの返答が表示される
+        });
+    }
+
 
     return { // ✅ 他コンポーネントで使うための `return`
         loading,
@@ -250,6 +255,7 @@ const useFirebase = () => {
         logout,
         gestLogin,
         editDb,
+        GeminiTestasync,
     };
 };
 export default useFirebase;

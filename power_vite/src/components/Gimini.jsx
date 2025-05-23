@@ -1,4 +1,4 @@
-/*import { useState } from "react";
+import { useState } from "react";
 import OpenAI from "openai";
 
 const openai = new OpenAI({
@@ -33,4 +33,4 @@ const Gimini = () => {
     );
 };
 
-export default Gimini;*/
+export default Gimini;
