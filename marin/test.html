@@ -51,7 +51,7 @@
       bottom: 200px;
       left: 200px;
       width: 180px;
-      height: 20px;
+      height: 120px;
       z-index: 10;
       background-image: url("https://ekakikaki.com/wp-content/uploads/2023/07/%E3%83%9E%E3%83%83%E3%83%81%E3%83%A7%EF%BC%91-300x300.png");
       background-size: contain;
@@ -86,7 +86,7 @@
       bottom: 200px;
       left: -100px;
       width: 80px; /* 画像の幅に合わせて調整 */
-      height: 180px; /* 画像の高さに合わせて調整 */
+      height: 100px; /* 画像の高さに合わせて調整 */
       background-image: url("https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg44EYAGTnkSN-MRACJ3MW3_rmq4Uz5Sl1tCd8ZhvMllkIQG4p700vCSnU7shr-8Dwt9xi-Y1qhas5IXSWc6aZmc0iPxxsZlF2goWce4IY9or-0I7JOv63QVnAKROYdizS3O9CtRy4SYxs/s800/warumono.png");
       background-size: contain;
       background-repeat: no-repeat;
@@ -138,7 +138,7 @@
       z-index: 100;
     }
 
-    /* 音量表示（デバッグ用） */
+    /* 音量表示 */
     #volumeDebug {
       position: absolute;
       top: 60px;
@@ -289,7 +289,7 @@
       location.reload();
     }
     
-    // 物理演算とアニメーションの更新 (高頻度)
+    // 物理演算とアニメーションの更新
     setInterval(() => {
       if (!gameRunning) return;
       
@@ -316,7 +316,7 @@
     }, 20);
 
 
-    // 敵のAI処理 (低頻度)
+    // 敵のAI処理 
     setInterval(() => {
       if (!gameRunning || enemyDefeated) return;
       
