@@ -1,6 +1,6 @@
 import  useFirebase  from "../hooks/useFirebase.jsx";//firebaseのフックをインポート
-const Rungame = () => {
+const Run = () => {
 
 };
 
-export default Rungame;
+export default Run;

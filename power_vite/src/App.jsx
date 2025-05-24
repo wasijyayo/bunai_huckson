@@ -3,7 +3,7 @@ import Home from "./components/Home"
 import AddDate from "./components/addDate"
 import Kuizu from "./components/Kuizu";
 import Minesweeper from "./components/Minesweeper";
-import Rungame from "./components/Rungame"
+import Rungame from "./components/Run"
 //import Gimini from "./components/Gimini"
 import { Routes, Route } from "react-router-dom";
 
