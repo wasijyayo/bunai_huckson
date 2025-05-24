@@ -7,6 +7,7 @@ import { useState } from "react";
 import useFirebase from "../hooks/useFirebase";//関数持ってくる
 import { time } from "framer-motion";
 import { onSnapshot, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 //import {doc, updateDoc} from "../firebase/firestore";
 //import {db} from "../firebase";
@@ -16,6 +17,7 @@ const Home = () => {
     const modalEdit = useDisclosure();
     const NewDate = useDisclosure();
     const toast = useToast();
+    const navigate = useNavigate();
     const [editLearning,setEditLearning] = useState({
         id: "",
         title: "",
@@ -241,13 +243,16 @@ const Home = () => {
                                     variant='outline'
                                     onClick={() => {GeminiTestasync(Gtext) }}
                                 >質問</Button>
+                                <Button
+                                    width='100%'
+                                    variant='outline'
+                                    onClick={() => {navigate("/Glaf") }}
+                                >グラフ</Button>
                             </Stack>
-
                         </Box>
                     </CardBody>
                 </Card>
             </Flex>
-
         </>
         
     )
