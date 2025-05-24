@@ -4,7 +4,7 @@ import { useToast } from "@chakra-ui/react";
 import { signInAnonymously, signInWithEmailAndPassword,signOut} from "firebase/auth";
 import { auth,db } from "../firebase.js";
 import { collection,getDocs,query,where } from "firebase/firestore";
-import {doc ,updateDoc,deleteDoc,addDoc,serverTimestamp} from "firebase/firestore";
+import {doc ,updateDoc,deleteDoc,addDoc,serverTimestamp,onSnapshot} from "firebase/firestore";
 
 const useFirebase = () => {
     const [loading, setLoading] = useState(false);
@@ -45,27 +45,37 @@ const useFirebase = () => {
     };
     //メールアドレスを初回読み込み時に取得する関数
     useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-            setUser(user);//  ユーザー情報をセット
+        const unsubscribeAuth = auth.onAuthStateChanged((user) => {
+            setUser(user); // ユーザー情報をセット
+            
             if (user) {
                 setEmail(user.email);
-                fetchDb(user.email); // ✅ ユーザーのメールアドレスを渡す
+                fetchDb(user.email); // ✅ 初回データ取得
+
+                // ✅ Firestore のリアルタイム監視を追加
+                const unsubscribeSnapshot = onSnapshot(collection(db, user.email), (snapshot) => {
+                    const updatedLearnings = snapshot.docs.map(doc => ({
+                        id: doc.id,
+                        ...doc.data()
+                    }));
+                    setLearnings(updatedLearnings); // ✅ UI に即座に反映
+                });
+
+                return () => unsubscribeSnapshot(); // ✅ Firestore の監視を解除
             } else {
-                //ユーザーがログインしていない場合の分岐
                 const authNotRequiredPaths = ["/login", "/register", "/sendReset"];
-                //現在地を返してくれる値
                 const currentPath = window.location.pathname;
 
-                // ✅ ログインが必要なページの場合、ログイン画面へ遷移
                 if (!authNotRequiredPaths.includes(currentPath)) {
                     navigate("/login");
                 }
             }
         });
 
-        return () => unsubscribe(); // ✅ 正しく監視を解除
+        return () => unsubscribeAuth(); // ✅ 認証監視を解除
     }, []);
-    
+
+    //更新関数
     const fetchDb = async (email) => {
     setLoading(true);
     try {
