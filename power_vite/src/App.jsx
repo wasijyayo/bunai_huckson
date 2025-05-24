@@ -3,7 +3,8 @@ import Home from "./components/Home"
 import AddDate from "./components/addDate"
 import Kuizu from "./components/Kuizu";
 import Minesweeper from "./components/Minesweeper";
-import Rungame from "./components/Run"
+import Glaf from "./components/glaf";
+import Run from "./components/Run";
 //import Gimini from "./components/Gimini"
 import { Routes, Route } from "react-router-dom";
 
@@ -20,7 +21,8 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/Minesweeper" element={< Minesweeper/>} />
-        <Route path="/Run" element={< Rungame/>} />
+        <Route path="/Run" element={< Run/>} />
+        <Route path="/Glaf" element={< Glaf/>} />
 
       </Routes>
     </>

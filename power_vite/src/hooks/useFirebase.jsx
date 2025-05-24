@@ -249,7 +249,6 @@ const useFirebase = () => {
     return { // ✅ 他コンポーネントで使うための `return`
         loading,
         setLoading,
-        email,
         setEmail,
         password,
         setPassword,
