@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}
         />
-        <Route path="/" element={<Kuizu/>}
+        <Route path="/Kuizu" element={<Kuizu/>}
         />
         <Route path="/" element={<addDate />}
         />
