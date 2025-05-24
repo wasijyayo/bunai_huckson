@@ -4,13 +4,13 @@ import { Box, Button, Card, CardBody, Flex, FormControl, FormLabel, Heading, Inp
 import { FiEdit } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
 import { useState } from "react";
-import useFirebase from "../hooks/useFirebase";
+import useFirebase from "../hooks/useFirebase";//関数持ってくる
 import { time } from "framer-motion";
 //import {doc, updateDoc} from "../firebase/firestore";
 //import {db} from "../firebase";
 
 const Home = () => {
-    const { learnings ,calculateTotalTime,email,fetchDb,updateDb,deleteDb,handCreate,logout} = useFirebase();
+    const { learnings ,calculateTotalTime,email,fetchDb,updateDb,deleteDb,handCreate,logout,editDb,GeminiTestasync} = useFirebase();
     const modalEdit = useDisclosure();
     const NewDate = useDisclosure();
     const toast = useToast();
@@ -25,11 +25,12 @@ const Home = () => {
     const [newLearning, setNewLearning] = useState({
         id: "",
         title: "",
+        date: 0,
         time: 0,
         createAt: 0,
     });
     //
-    
+    const [Gtext, setGtext] = useState("");
     return (
         <>
             <Flex alignItems='center' justify='center' p={5}>
@@ -99,10 +100,20 @@ const Home = () => {
                                         required
                                         />
                                     </FormControl>
-                                    <Button colorScheme="blue" mr={3} onClick={() => {
+                                    <Button colorScheme="blue" mr={3} onClick={async() => {
+                                        editDb(editLearning)
+                                        // const url = `https://us-central1-power-bunai.cloudfunctions.net/addmessage?text=${encodeURIComponent(editLearning.title)}`;
+                                        // try {
+                                        //     const res = await fetch(url);//レスポンスをres格納
+                                        //     const data = await res.json();//レスポンスをJSON形式に変換
+                                        //     console.log("APIレスポンス:", data);
+                                        // } catch (err) {
+                                        //     console.error("APIエラー:", err);
+                                        // }
                                         console.log("学習内容の更新:", editLearning);
-                                        updateDb(editLearning);
-                                        fetchDb(email);
+                                        //updateDb(editLearning);
+                                        editDb(editLearning);//モーダル内の処理
+                                        fetchDb(email);//バックからデータ取得
                                         modalEdit.onClose();
                                         toast({
                                             title: "データを更新しました!",
@@ -112,6 +123,7 @@ const Home = () => {
                                         });
                                     }}>
                                         確定
+                                        
                                     </Button>
 
                                 </ModalBody>
@@ -142,8 +154,9 @@ const Home = () => {
                                     </FormControl>
                                     <Button colorScheme="blue" mr={3} onClick={() => {
                                         console.log("新規データ登録:", newLearning);
-                                        handCreate(newLearning);
+                                        //handCreate(newLearning);
                                         fetchDb(email);
+                                        editDb(newLearning);
                                         NewDate.onClose();
                                         toast({
                                             title: "データを追加しました!",
@@ -180,13 +193,20 @@ const Home = () => {
                                 >ログアウト</Button>
                             </Stack>
                         </Box>
+
                         <Box px={25} mb={4}>
                             <Stack spacing={3}>
+                                <input
+                                    type="text"
+                                    placeholder="Geminiに聞きたいことを入力"
+                                    value={Gtext}
+                                    onChange={(e) => setGtext(e.target.value)}
+                                />
                                 <Button
                                     width='100%'
                                     variant='outline'
-                                    onClick={() => { }}
-                                >パスワード更新</Button>
+                                    onClick={() => {GeminiTestasync(Gtext) }}
+                                >質問</Button>
                             </Stack>
                         </Box>
                     </CardBody>
