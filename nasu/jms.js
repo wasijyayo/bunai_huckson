@@ -30,10 +30,10 @@
     this.currentSetpCount = 0; // 実行されたステップ数
     this.endCallBack = null; // ゲーム終了時のコールバック関数
     this.landMineCallBack = null; // 地雷がマークされたときの残りの地雷数を更新するコールバック関数
-    //this.doc.oncontextmenu = function () {
+    this.doc.oncontextmenu = function () {
       // 右クリックメニューを無効にする
-      //return false;
-    //};
+    return false;
+    };
     this.drawMap();
   };
 
