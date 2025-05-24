@@ -1,0 +1,107 @@
+body{
+    background-color: #f7fafc;
+    font-family: Arial, sans-serif;
+}
+
+#JMS_main{
+    width: 640px;
+    margin: 15px auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0,0.1);
+}
+
+#landmine td {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #ddd;
+    cursor: pointer;
+}
+
+
+#begin{
+    background-color: blue;
+    color: white;
+}
+
+#begin:hover{
+    background-color: rgb(85, 85, 255);
+}
+
+.container {
+  max-width: 600px;
+}
+
+
+table {
+    border: 10px;
+    background: #ccc;
+    margin: 0 auto;
+}
+
+td {
+  border: 2px outset #eee;
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  text-align: center;
+  cursor: pointer;
+}
+
+button {
+  padding: 2px 10px;
+  margin: 5px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.clicked-cell {
+  background-color: #a0aec0;
+  color: black;
+  font-weight: bold;
+}
+
+.safe {
+  background-color: #c6f6d5 !important; /* ñæÇÈÇ¢ÉOÉäÅ[Éì */
+}
+
+
+.landMine {
+  background-image: url(./TNT.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.flag {
+  background-image: url(./flag.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.scene{
+  display: none;
+}
+
+.scene.active{
+  display: block;
+}
+
+#gameover button {
+  display: inline-block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  position: static !important;
+  background-color: #007BFF;
+  color: white;
+  padding: 10px 20px;
+  font-size: 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 9999;
+}
