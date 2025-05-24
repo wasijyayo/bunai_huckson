@@ -1,10 +1,10 @@
 import Login from "./components/Login"
 import Home from "./components/Home"
 import AddDate from "./components/addDate"
-
 import Kuizu from "./components/Kuizu";
 import Minesweeper from "./components/Minesweeper";
 import Rungame from "./components/Rungame"
+//import Gimini from "./components/Gimini"
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -19,7 +19,6 @@ function App() {
         <Route path="/" element={<addDate />}
         />
         <Route path="/login" element={<Login />} />
-
         <Route path="/Minesweeper" element={< Minesweeper/>} />
         <Route path="/Rungame" element={< Rungame/>} />
 
