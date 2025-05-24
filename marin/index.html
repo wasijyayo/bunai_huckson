@@ -192,8 +192,6 @@
     const scoreElement = document.getElementById("score");
     const volumeDebugElement = document.getElementById("volumeDebug");
     const holes = [];
-    const platforms = [];
-    const smallPlatforms = [];
     
     // マッチョのステート
     let y = 200, vy = 0, isJumping = false;
@@ -201,7 +199,6 @@
     let machoX = 200; // 初期位置を設定
     let score = 0;
     let gameRunning = false;
-    let groundLevel = 200;  // 現在の接地レベル（段差上だと高くなる）
     
     // 敵のステート
     let enemyX = 100; 
@@ -209,7 +206,6 @@
     let enemyVy = 0;
     let enemyIsJumping = false;
     let enemyDefeated = false;
-    let enemyGroundLevel = 0;  // 敵の接地レベル（地面基準）
     let gameStarted = false;
     let volume = 0; // 音量変数の初期化
     
@@ -297,8 +293,8 @@
       if (isJumping) {
         y += vy;
         vy -= 1.2;
-        if (y <= groundLevel) {
-          y = groundLevel;
+        if (y <= 200) {
+          y = 200;
           isJumping = false;
         }
         macho.style.bottom = y + "px";
@@ -333,27 +329,6 @@
 
       // 敵の段差認識
       const enemyRect = enemy.getBoundingClientRect();
-      
-      // 敵が段差の上にいるかチェック
-      let enemyOnPlatform = false;
-      platforms.concat(smallPlatforms).forEach(platform => {
-        const platformRect = platform.getBoundingClientRect();
-        if (enemyRect.right > platformRect.left && enemyRect.left < platformRect.right) {
-          enemyOnPlatform = true;
-          if (!enemyIsJumping) {
-            enemyGroundLevel = platform.offsetHeight;
-            enemyY = enemyGroundLevel;
-            enemy.style.bottom = enemyY + "px";
-          }
-        }
-      });
-
-      // 敵が段差上にいない場合は地面レベルをリセット
-      if (!enemyOnPlatform && !enemyIsJumping && enemyGroundLevel > 0) {
-        enemyGroundLevel = 0;
-        enemyIsJumping = true;
-        enemyVy = 0;
-      }
 
       // 敵が穴の手前に来たらジャンプ
       holes.forEach(hole => {
