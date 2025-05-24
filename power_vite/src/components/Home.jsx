@@ -73,7 +73,8 @@ const Home = () => {
                                             <Tr key={item.id}>
                                                 <Td>{item.title}</Td>
                                                 <Td>{item.time}</Td>
-                                                <Td>
+                                                <Td>{item.date ? item.date.toFixed(0) : "-"}</Td>
+                                                <Td textAlign="left" >
                                                     <Button variant='ghost' onClick={() =>{
                                                         setEditLearning(item);//クリック時にデータをセット
                                                         modalEdit.onOpen();//モーダルを開く
