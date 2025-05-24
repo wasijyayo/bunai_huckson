@@ -128,6 +128,7 @@ const useFirebase = () => {
                 createAt: serverTimestamp(),
             });
             await fetchDb(email); // ✅ データを再取得
+            console.log("データ更新");
             toast({
                 title: "データを追加しました!",
                 status: "success",
@@ -226,7 +227,7 @@ const useFirebase = () => {
         }
     };
     const GeminiTestasync = async(sendText) => {
-        fetch("http://localhost:5001/power-bunai/getGimini?contents="+ encodeURIComponent(sendText))
+        fetch("https://asia-northeast1-power-bunai.cloudfunctions.net/getGimini?contents="+ encodeURIComponent(sendText))
         .then(res => res.json())
         .then(data => {
             // ここでの data は { text: "AIの返答" } というオブジェクト
