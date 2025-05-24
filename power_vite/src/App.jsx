@@ -20,7 +20,7 @@ function App() {
         />
         <Route path="/login" element={<Login />} />
         <Route path="/Minesweeper" element={< Minesweeper/>} />
-        <Route path="/Rungame" element={< Rungame/>} />
+        <Route path="/Run" element={< Rungame/>} />
 
       </Routes>
     </>
