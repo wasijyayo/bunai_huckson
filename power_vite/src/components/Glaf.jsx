@@ -76,4 +76,4 @@ const ApexChart = () => {
     </div>
   );
 };
-export default ApexChart;
+export default Glaf;
