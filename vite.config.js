@@ -7,5 +7,6 @@ export default defineConfig({
   base: "/bunai_huckson/", // GitHub Pages 用のベースパスを設定
   build: {
     outDir: "dist",
+    publicDir: "public",
   },
 });
