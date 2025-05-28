@@ -14,7 +14,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Kuizu" element={<Kuizu />} />
-        <Route path="/" element={<addDate />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Minesweeper" element={<Minesweeper />} />
         <Route path="/Run" element={<Run />} />
